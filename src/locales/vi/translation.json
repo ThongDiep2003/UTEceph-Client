@@ -1,0 +1,21 @@
+{
+    "login": "Đăng nhập",
+    "register":"Đăng kí",
+    "sign up":"Đăng kí",
+    "schedule":"Lịch hẹn",
+    "patient list":"danh sách bệnh nhân",
+    "password":"Mật khẩu",
+    "Re-enter Password":"Nhập lại mật khẩu",
+    "forgot Password?":"Quên mật khẩu?",
+    "Don't have an account":"Bạn không có tài khoản",
+    "Already have an account?":"Bạn đã có tài khoản?",
+    "email is incorrect format":"Email không đúng định dạng",
+    "email is required":"Email không được để trống",
+    "password is required":"Mật khẩu không không được để trống",
+    "confirm password is required":"Xác nhận mật khẩu không được để trống",
+    "password mismatch":"Mật khẩu không trùng nhau",
+    "homepage":"Trang chủ",
+    "setting":"Cài đặt",
+    "log out":"Đăng xuất"
+}
+

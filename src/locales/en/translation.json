@@ -1,0 +1,20 @@
+{
+    "login": "Login",
+    "register":"Register",
+    "sign up": "Sign up",
+    "schedule":"schedule",
+    "patient list":"Patient list",
+    "password":"Password",
+    "Re-enter Password":"Re-enter Password",
+    "forgot Password?":"Forgot Password?",
+    "Don't have an account":"Don't have an account",
+    "Already have an account?":"Already have an account?",
+    "email is incorrect format":"Email is incorrect format",
+    "email is required":"Email is required",
+    "password is required":"Password is required",
+    "confirm password is required":"Confirm password is required",
+    "password mismatch":"Password mismatch",
+    "homepage":"Homepage",
+    "setting":"Setting",
+    "log out":"Log out"
+}
