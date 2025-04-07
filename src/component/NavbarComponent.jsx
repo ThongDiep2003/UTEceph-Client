@@ -4,17 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAppName, setLanguage } from "../redux/GeneralSlice.jsx";
 import i18n from '../translation/i18n.jsx';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { baseURL } from "../services/getAPI.jsx";
 import { logOutDoctor } from "../redux/DoctorSlice.jsx";
+import { splitEmail } from "../common/Utility.jsx";
 
 const FONT_SIZE = '17px';
 
 export default function NavbarComponent(props) {
-  const doctor = useSelector(state=>state.doctor.doctor);
+  const doctor = useSelector(state=>state.doctor.data);
   const language = useSelector(state => state.general.language);
   const appName = useSelector(state => state.general.appName);
   const dispatch  = useDispatch();
+  const nav = useNavigate();
   const {t} = useTranslation();
 
   useEffect(()=>{
@@ -32,12 +34,16 @@ export default function NavbarComponent(props) {
           <title className="text-capitalize">{appName}</title>
         </Helmet>
         <div className="container">
-          <div className="d-flex flex-row justify-content-between align-items-center py-2">
+          <div className="d-flex flex-row justify-content-between align-items-center py-1">
             <div className="d-flex flex-row justify-content-start align-items-center">
               <Link to={"/"} onClick={e=>dispatch(setAppName('Myceph'))}>
                 <img style={{height:"43px"}} src="/assets/icons/logo-mc.png" alt='logo' />
               </Link>
-              <span className="me-3 ms-2 text-capitalize text-gray mc-color-hover" style={{fontSize:FONT_SIZE,cursor:"pointer"}}>{t('schedule')}</span>
+              <Link to={"/"} style={{textDecoration:"none"}}>
+                <span className="me-3 ms-2 text-capitalize text-gray mc-color-hover" style={{fontSize:FONT_SIZE,cursor:"pointer"}}>{t('homepage')}</span>
+              </Link>
+              <span className="vr"></span>
+              <span className="mx-3 text-capitalize text-gray mc-color-hover" style={{fontSize:FONT_SIZE,cursor:"pointer"}}>{t('schedule')}</span>
               <span className="vr"></span>
               <span className="mx-3 text-capitalize text-gray mc-color-hover" style={{fontSize:FONT_SIZE,cursor:"pointer"}}>{t('patient list')}</span>
             </div>
@@ -80,17 +86,19 @@ export default function NavbarComponent(props) {
                   <button className="btn border-0 dropdown-toggle d-flex flex-row align-items-center px-2 text-gray" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{outline:"none"}}>
                     <div className="d-flex flex-row align-items-center" style={{background:"transparent"}}>
                       <img className="me-1 mb-1" src="/assets/icons/user.png" style={{height:"20px",background:"transparent"}} alt=""/>
-                      <span className="mc-color-hover" style={{fontSize:FONT_SIZE,background:"transparent"}}>{doctor.email}</span>
+                      <span className="mc-color-hover" style={{fontSize:FONT_SIZE,background:"transparent"}}>{doctor.fullName?doctor.fullName:splitEmail(doctor.email)}</span>
                     </div>
                   </button>
                   <ul className="dropdown-menu py-0 px-1 border">
+                    <Link to={"/setting"} style={{textDecoration:"none"}}>
+                      <li className="w-100">
+                        <button className="btn d-flex flex-row align-items-center w-100 border-0">
+                          <span className="text-capitalize mc-color-hover" style={{fontSize:FONT_SIZE,background:"transparent"}}>{t('setting')}</span>
+                        </button>
+                      </li>
+                    </Link>
                     <li className="w-100">
-                      <button className="btn d-flex flex-row align-items-center w-100 border-0">
-                        <span className="text-capitalize mc-color-hover" style={{fontSize:FONT_SIZE,background:"transparent"}}>{t('setting')}</span>
-                      </button>
-                    </li>
-                    <li className="w-100">
-                      <button className="btn d-flex flex-row align-items-center w-100 border-0" onClick={e=>dispatch(logOutDoctor())}>
+                      <button className="btn d-flex flex-row align-items-center w-100 border-0" onClick={e=>{dispatch(logOutDoctor());nav("/login")}}>
                         <span className="text-capitalize mc-color-hover" style={{fontSize:FONT_SIZE,background:"transparent"}}>{t('log out')}</span>
                       </button>
                     </li>
@@ -98,12 +106,12 @@ export default function NavbarComponent(props) {
                 </div>
                 :
                 <React.Fragment>
-                  <Link to={"/login"} style={{textDecoration:"none"}} onClick={e=>dispatch(setAppName(`Myceph - ${t('login')}`))}>
+                  <Link to={"/login"} style={{textDecoration:"none"}}>
                     <span className="mx-3 text-capitalize text-gray mc-color-hover" style={{fontSize:FONT_SIZE,cursor:"pointer"}}>{t('login')}</span>
                   </Link>
                   <span className="vr"></span>
-                  <Link to={"/register"} style={{textDecoration:"none"}} onClick={e=>dispatch(setAppName(`Myceph - ${t('register')}`))}>
-                    <span className="mx-3 text-capitalize text-gray mc-color-hover" style={{fontSize:FONT_SIZE,cursor:"pointer"}}>{t('register')}</span>
+                  <Link to={"/register"} style={{textDecoration:"none"}}>
+                    <span className="mx-3 text-capitalize text-gray mc-color-hover" style={{fontSize:FONT_SIZE,cursor:"pointer"}}>{t('sign up')}</span>
                   </Link>
                 </React.Fragment>
               }

@@ -1,6 +1,6 @@
 {
     "login": "Đăng nhập",
-    "register":"Đăng kí",
+    "register":"Tạo tài khoản",
     "sign up":"Đăng kí",
     "schedule":"Lịch hẹn",
     "patient list":"danh sách bệnh nhân",
@@ -16,6 +16,9 @@
     "password mismatch":"Mật khẩu không trùng nhau",
     "homepage":"Trang chủ",
     "setting":"Cài đặt",
-    "log out":"Đăng xuất"
+    "log out":"Đăng xuất",
+    "Could not find email":"Không tìm thấy email phù hợp",
+    "wrong password":"Sai mật khẩu",
+    "Email doctor is already exists":"Email của bác sĩ đã tồn tại"
 }
 

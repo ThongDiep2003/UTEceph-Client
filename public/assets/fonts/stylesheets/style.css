@@ -3,7 +3,7 @@
 }
 
 .mc-pale-background{
-  background-color: #40bab5;
+  background-color: #40bab5 !important;
 }
 
 .mc-color{
@@ -39,6 +39,10 @@
   opacity: .25;
 }
 
+.mc-background-color-white{
+  background-color: #f7f7f7;
+}
+
 .mc-heading{
   font-family: sans-serif;
   font-weight: 700;
@@ -50,6 +54,10 @@
   background-color: #40bab5 !important;
   border-color: #40bab5 !important;
   --bs-btn-color:#40bab5 !important;
+}
+
+.text-white-hover:hover{
+  color: white !important;
 }
 
 .btn-outline-light{

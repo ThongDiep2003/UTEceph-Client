@@ -16,5 +16,8 @@
     "password mismatch":"Password mismatch",
     "homepage":"Homepage",
     "setting":"Setting",
-    "log out":"Log out"
+    "log out":"Log out",
+    "Could not find email":"Could not find email",
+    "wrong password":"wrong password",
+    "Email doctor is already exists":"Email doctor is already exists"
 }

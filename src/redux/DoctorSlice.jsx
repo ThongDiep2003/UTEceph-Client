@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
-import { cookies } from "../common/Untility.jsx";
+import { cookies } from "../common/Utility.jsx";
 
 export const DoctorSlice = createSlice({
   name: 'doctor',

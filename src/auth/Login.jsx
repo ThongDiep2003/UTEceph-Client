@@ -7,11 +7,11 @@ import ButtonComponent from "../common/ButtonComponent.jsx";
 import NavbarComponent from "../component/NavbarComponent.jsx";
 import { postToServer } from "../services/getAPI.jsx";
 import { setDataDoctor } from "../redux/DoctorSlice.jsx";
-import { cookies, isValidEmail, SITE_KEY_RECAPTCHA } from "../common/Untility.jsx";
+import { cookies, isValidEmail, SITE_KEY_RECAPTCHA } from "../common/Utility.jsx";
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { setAppName } from "../redux/GeneralSlice.jsx";
 
-function LoginPgae(props){
+function LoginPage(props){
   const [loading,setLoading] = useState(false);
   const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -21,6 +21,10 @@ function LoginPgae(props){
 	const nav = useNavigate();
   const {t} = useTranslation();
   const { executeRecaptcha } = useGoogleReCaptcha();
+
+  useEffect(()=>{
+    dispatch(setAppName(`Myceph - ${t('login')}`));
+  },[])
   
 	const loginSubmit = (e) => {
 		if (!email) setEmailError(t('email is required'));
@@ -33,10 +37,9 @@ function LoginPgae(props){
           cookies.set('accessToken', result.data.accessToken, { path: '/' });
           delete result.data.accessToken;
           dispatch(setDataDoctor(result.data));
-          dispatch(setAppName(`Myceph - ${t('homepage')}`));
           nav("/");
         })
-        .catch((err) => toast.error(err.message)).finally(() => setLoading(false))
+        .catch((err) => toast.error(t(err.message))).finally(() => setLoading(false))
       );
 		}
 	};
@@ -52,7 +55,7 @@ function LoginPgae(props){
       <div
         className="d-flex flex-column align-items-center justify-content-center flex-grow-1"
         style={{ width: '360px' }}>
-        <h1 className="my-4 text-center viceph-color text-capitalize mc-color" style={{ fontWeight: 'bold' }}>
+        <h1 className="my-4 text-center  text-capitalize mc-color fw-bold">
           {t('login')}
         </h1>
         <div className={`mb-3 d-flex align-items-center justify-content-between input-group form-control border`}>
@@ -105,9 +108,11 @@ function LoginPgae(props){
           </p>
         )}
         <div className="d-flex justify-content-end mb-4 text-capitalize mc-color-hover" style={{ width: '100%' }}>
-          <a className="text-capitalize mc-color-hover mc-color" href="#" style={{textDecoration:"none"}}>
-            {t('forgot Password?')}
-          </a>
+          <Link  style={{textDecoration:"none"}} to={"/forgotPassword"}>
+            <span className="text-capitalize mc-color-hover mc-color">
+              {t('forgot Password?')}
+            </span>
+          </Link>
         </div>
         <span className="my-2"></span>
         {loading ? <div className="spinner-grow"></div> : <ButtonComponent label={t('login')} onClick={loginSubmit} />}
@@ -127,7 +132,7 @@ function LoginPgae(props){
 export default function Login(){
   return (
     <GoogleReCaptchaProvider reCaptchaKey={SITE_KEY_RECAPTCHA}>
-      <LoginPgae />
+      <LoginPage />
     </GoogleReCaptchaProvider>
   )
 }
