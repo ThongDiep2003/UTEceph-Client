@@ -20,7 +20,7 @@ export default function UploadImage(props){
   })
 
   return (
-    <button type="btn" {...getRootProps({className:`dropzone border btn btn-outline-info p-0 m-0 ${props.className}`})} style={props.style}>
+    <button type="btn" {...getRootProps({className:`dropzone border btn p-0 m-0 ${props.className}`})} style={props.style}>
       <input {...getInputProps()} />
       <span className="material-symbols-outlined mt-1" style={{fontSize:"30px"}}>
         photo_camera

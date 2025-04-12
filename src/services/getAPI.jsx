@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { cookies } from "../common/Utility.jsx";
+import { clearClinicSlice } from "../redux/ClinicSlice.jsx";
 import { logOutDoctor } from "../redux/DoctorSlice.jsx";
 
 export const baseURL = process.env.BASE_URL_DEVELOPMENT;
@@ -38,6 +39,7 @@ export function postToServerWithToken(url, bodyObject,dispatch) {
 				if(response.status==403){
 					if(response.isLogin===false){
 						dispatch(logOutDoctor());
+						dispatch(clearClinicSlice());
 					}
 				}
 				if (response.status === 419) {
@@ -101,3 +103,28 @@ export function getToServerWithToken(url) {
 	);
 }
 
+
+export function deleteToServerWithToken(url) {
+	return new Promise(async (resolve, reject) => {
+    const token = await cookies.get('accessToken');
+    fetch(baseURL + url, {
+			method: 'delete',
+			headers: { 'Content-Type': 'application/json', token: `Bearer ${token}`},
+			credentials: 'same-origin'
+		})
+			.then((response) => {
+				if(response.status===403){
+					response.json().then(json => reject(json))
+				}
+				if (response.status === 419) {
+					alert('Your session is already expired because you are idle for too long. Page will automatic refesh.');
+					window.location.reload();
+				}
+				if (response.status === 200) {
+						response.json().then(json => resolve(json));
+				} else response.json().then(json => reject(json));
+			})
+			.catch((err) => reject(err))
+    }
+	);
+}

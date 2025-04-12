@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import ClinicSlice from './ClinicSlice.jsx';
 import DoctorSlice from './DoctorSlice.jsx';
 import GeneralSlice from './GeneralSlice.jsx';
 
@@ -11,7 +12,7 @@ const persistConfig = {
 	backList: ['general']
 };
 
-const rootReducer = combineReducers({doctor: DoctorSlice, general: GeneralSlice});
+const rootReducer = combineReducers({doctor: DoctorSlice, general: GeneralSlice, clinic: ClinicSlice});
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({

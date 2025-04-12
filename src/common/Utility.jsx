@@ -10,6 +10,16 @@ export const CLOUDINARY_KEY = '621123368244999';
 export const CLOUDINARY_SECRET = 'bg5jrQ0D-YvLgDTDU1fKtFqCyMI';
 export const CLOUDINARY_BASE_URL = 'https://api.cloudinary.com/v1_1/dvzgiho5t';
 
+export function moveElementToStartArray(array,email){
+  const indexOfElement = array.findIndex(element => 
+    element.email === email
+  );
+  const elementIndex = array[indexOfElement];
+  array.splice(indexOfElement,1);
+  array.unshift(elementIndex);
+  return array;
+}
+
 export function isValidEmail(email) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 }
@@ -19,12 +29,22 @@ export function splitEmail(email) {
   return nameEmail[0];
 }
 
-export function splitAvatar(url) {
+export function splitAvatar(url,imageUrl) {
   if(url){
     const avatarUrl = url.split('_');
     return avatarUrl[0];
   }
-  return '/assets/images/doctor.png';
+  return imageUrl;
+}
+
+export function splitFirst(string) {
+  const stringSplit = string.split('_');
+  return stringSplit[0];
+}
+
+export function splitLast(string) {
+  const stringSplit = string.split('_');
+  return stringSplit[1];
 }
 
 export function splitPublic_id(url) {

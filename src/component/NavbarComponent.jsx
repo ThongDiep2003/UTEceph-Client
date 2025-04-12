@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { baseURL } from "../services/getAPI.jsx";
 import { logOutDoctor } from "../redux/DoctorSlice.jsx";
 import { splitEmail } from "../common/Utility.jsx";
+import { clearClinicSlice } from "../redux/ClinicSlice.jsx";
 
 const FONT_SIZE = '17px';
 
@@ -89,17 +90,17 @@ export default function NavbarComponent(props) {
                       <span className="mc-color-hover" style={{fontSize:FONT_SIZE,background:"transparent"}}>{doctor.fullName?doctor.fullName:splitEmail(doctor.email)}</span>
                     </div>
                   </button>
-                  <ul className="dropdown-menu py-0 px-1 border">
+                  <ul className="dropdown-menu py-0 px-1 border w-100">
                     <Link to={"/setting"} style={{textDecoration:"none"}}>
-                      <li className="w-100">
+                      <li className="w-100 mc-color-hover">
                         <button className="btn d-flex flex-row align-items-center w-100 border-0">
-                          <span className="text-capitalize mc-color-hover" style={{fontSize:FONT_SIZE,background:"transparent"}}>{t('setting')}</span>
+                          <span className="text-capitalize" style={{fontSize:FONT_SIZE,background:"transparent"}}>{t('setting')}</span>
                         </button>
                       </li>
                     </Link>
-                    <li className="w-100">
-                      <button className="btn d-flex flex-row align-items-center w-100 border-0" onClick={e=>{dispatch(logOutDoctor());nav("/login")}}>
-                        <span className="text-capitalize mc-color-hover" style={{fontSize:FONT_SIZE,background:"transparent"}}>{t('log out')}</span>
+                    <li className="w-100 mc-color-hover">
+                      <button className="btn d-flex flex-row align-items-center w-100 border-0" onClick={e=>{dispatch(logOutDoctor());dispatch(clearClinicSlice());nav("/login")}}>
+                        <span className="text-capitalize" style={{fontSize:FONT_SIZE,background:"transparent"}}>{t('log out')}</span>
                       </button>
                     </li>
                   </ul>
