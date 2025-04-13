@@ -1,0 +1,361 @@
+.mc-background {
+  background-color: #003366;
+}
+
+.mc-pale-background {
+  background-color: #40bab5 !important;
+}
+
+.mc-color {
+  color: #003366 !important;
+}
+
+.mc-pale-color {
+  color: #40bab5 !important;
+}
+
+.upload-hover:hover img {
+  content: url("/public/assets/gif/upload.gif");
+  height: 70px !important;
+}
+
+.text-gray {
+  color: #4e4e4e;
+}
+
+.mc-color-hover:hover {
+  color: #003366 !important;
+}
+
+.mc-color-hover:hover {
+  color: #40bab5 !important;
+}
+
+.hover-table:hover {
+  background-color: #acfffb !important;
+}
+
+.mc-border-pale {
+  border: 2px;
+  border-color: #40bab5 !important;
+}
+
+.gradient-color {
+  background: #40bab5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #185a9d,
+    #40bab5
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #185a9d,
+    #40bab5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.gradient_color_green {
+  background: #185a9d; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #26d0ce,
+    #185a9d
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #26d0ce,
+    #185a9d
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.mc-yellow-background {
+  background-color: goldenrod !important;
+}
+
+.mc-yellow-hover:hover {
+  background-color: goldenrod !important;
+}
+
+.hoverGreenLight:hover {
+  background-color: #40bab5 !important;
+}
+
+.vr {
+  display: inline-block;
+  align-self: stretch;
+  width: 1px;
+  min-height: 1em;
+  background-color: currentcolor;
+  opacity: 0.25;
+}
+
+.mc-background-color-white {
+  background-color: #f7f7f7;
+}
+
+.hover-font-weight:hover {
+  font-weight: bold;
+}
+
+.cursor-grab {
+  cursor: grab !important;
+}
+
+.cursor-grabbing {
+  cursor: grabbing !important;
+}
+
+.cursor-crosshair {
+  cursor: crosshair;
+}
+
+.mc-background-light {
+  background: #f0f8ff;
+}
+
+.mc-heading-middle {
+  font-family: sans-serif;
+  font-weight: 400;
+}
+
+.mc-heading {
+  font-family: sans-serif;
+  font-weight: 700;
+  font-size: 16;
+  color: #043d5d;
+}
+
+.btn-hover-bg:hover {
+  color: white !important;
+  background-color: #40bab5 !important;
+  border-color: #40bab5 !important;
+  --bs-btn-color: #40bab5 !important;
+}
+
+.react-calendar {
+  font-family: "Quicksand", sans-serif !important;
+}
+
+.mc-font {
+  font-family: "Quicksand", sans-serif !important;
+}
+
+.text-white-hover:hover {
+  color: white !important;
+}
+
+.btn-outline-light {
+  --bs-btn-hover-color: #043d5d !important;
+  --bs-btn-active-color: #043d5d !important;
+}
+
+.btn-primary {
+  --bs-btn-bg: #043d5d !important;
+  --bs-btn-border-color: #043d5d !important;
+  --bs-btn-hover-bg: #40bab5 !important;
+  --bs-btn-hover-border-color: #40bab5 !important;
+  --bs-btn-active-bg: #40bab5 !important;
+  --bs-btn-active-border-color: #40bab5 !important;
+  --bs-btn-disabled-bg: #043d5d !important;
+  --bs-btn-disabled-border-color: #043d5d !important;
+}
+
+.transform-hover:hover {
+  transition-duration: 0.5s;
+  transform: scale(1.03);
+}
+
+.transform-hover-small:hover {
+  transition-duration: 0.5s;
+  transform: scaleX(1.01);
+}
+
+.body-table:hover > :not(:hover) {
+  transition-duration: 0.3s;
+  transform: scaleX(0.99);
+}
+
+.standout {
+  animation: crescendo 0.5s alternate infinite;
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+  border: 7px dotted #043d5d;
+  border-style: solid solid dotted dotted;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+.loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 4px dotted #40bab5;
+  border-style: solid solid dotted;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  animation: rotationBack 1s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes crescendo {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.3);
+  }
+}
+
+.tableFixHead thead th {
+  position: sticky; /* make the table heads sticky */
+  top: 0px; /* table head will be placed from the top of the table and sticks to it */
+}
+
+.tableFixHead {
+  overflow-y: auto; /* make the table scrollable if height is more than 200 px  */
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .list-clinic-parent {
+    width: 300px !important;
+  }
+  .label-width-setting {
+    width: 60px !important;
+    margin-left: 0px !important;
+    margin-top: 5px !important;
+  }
+  .span-value-setting {
+    width: 330px !important;
+    margin-top: 5px !important;
+  }
+  .span-value-setting-other-doctor {
+    width: 300px !important;
+    margin-top: 5px !important;
+    margin-left: 10px !important;
+  }
+  .technology_place {
+    height: 370px;
+  }
+  .background_technology {
+    width: 490px;
+  }
+  .pattern2 {
+    left: -325px !important;
+  }
+  .pattern1 {
+    top: 1000px;
+  }
+  .pattern3 {
+    left: -325px !important;
+  }
+  .info-clinic {
+    margin-left: 0px !important;
+  }
+  .infor-mc {
+    margin-top: 5000px !important;
+  }
+  .footer-info {
+    margin-top: 2435px !important;
+  }
+  .mc-header {
+    font-size: 50px !important;
+  }
+  .mc-header2 {
+    font-size: 30px !important;
+  }
+  .info-header {
+    align-items: start !important;
+  }
+  .img-info {
+    max-width: 325px !important;
+  }
+  .hr-line {
+    width: 40px !important;
+  }
+  .add-clinic {
+    max-width: 370px !important;
+  }
+  .header-des {
+    width: 315px !important;
+    text-align: left !important;
+  }
+  .full-width-on-mobile {
+    width: 100% !important;
+    text-align: start !important;
+  }
+  .list-software {
+    flex-wrap: wrap !important;
+  }
+  .menu-patient {
+    height: 130px !important;
+  }
+  .select-patient {
+    min-width: 360px !important;
+  }
+  .name-width {
+    min-width: 140px !important;
+  }
+  .submit-icon {
+    min-width: 50px !important;
+  }
+  .name-col {
+    min-width: 260px !important;
+  }
+  .action-col {
+    min-width: 60px !important;
+  }
+  .user-setting {
+    margin-left: 0px !important;
+  }
+}
+
+.menu-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.menu-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}

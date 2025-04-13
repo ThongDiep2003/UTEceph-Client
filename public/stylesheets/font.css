@@ -1,0 +1,18 @@
+/* font utm */
+@font-face {
+    font-family: 'UTM Avo';
+    src: url("../fonts/UTM\ Avo.ttf") format('truetype'), url("../fonts/UTM\ Avo.ttf") format('embedded-opentype'),
+    url("../fonts/UTM\ Avo.ttf") format('woff');
+    font-weight:normal;
+    font-style:normal;
+  }
+  
+  @font-face {
+    font-family: 'UTM Avo Bold';
+    src: url('../fonts/UTM\ AvoBold.ttf') format('truetype'), url('../fonts/UTM\ AvoBold.ttf') format('embedded-opentype'),
+    url('../fonts/UTM\ AvoBold.ttf') format('woff');
+    font-weight:normal;
+    font-style:normal;
+  }
+  
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');

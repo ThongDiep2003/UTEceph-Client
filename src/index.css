@@ -1,18 +1,16 @@
 body {
   margin: 0;
-  height: 100%;
+  height: 100vh;
 }
 
-
 html {
-  height: 100%;
+  height: 100vh;
   width: 100%;
 }
 
 div#root {
-  font-family: 'Quicksand', sans-serif;
+  overflow-y: auto;
+  font-family: "Quicksand", sans-serif;
   background-color: white;
-  height: 100%; /* remove this line to see div.app is no more 100% height */
+  height: 100vh; /* remove this line to see div.app is no more 100% height */
 }
-
-      
