@@ -1,9 +1,7 @@
-import { useDispatch } from "react-redux";
 import { cookies } from "../common/Utility.jsx";
-import { clearClinicSlice } from "../redux/ClinicSlice.jsx";
-import { logOutDoctor } from "../redux/DoctorSlice.jsx";
 
-export const baseURL = process.env.BASE_URL_DEVELOPMENT;
+const isDevelopment = process.env.NODE_ENV==='development';
+export const baseURL = isDevelopment?'http://localhost:8080':'https://uteceph-backend.onrender.com';
 
 export function postToServer(url, bodyObject) {
 	return new Promise((resolve, reject) =>
@@ -14,19 +12,37 @@ export function postToServer(url, bodyObject) {
 			body: JSON.stringify(bodyObject),
 		})
 			.then((response) => {
+				if(response.status===429) response.text().then(json=>reject(json));
 				if (response.status === 419) {
-					alert('Your session is already expired because you are idle for too long. Page will automatic refesh.');
 					window.location.reload();
-				}
-				if (response.status === 200) {
+				}else if (response.status === 200) {
 						response.json().then(json => resolve(json));
-				} else response.json().then(json => reject(json));
+				}else response.json().then(json => reject(json));
 			})
 			.catch((err) => reject(err)),
 	);
 }
 
-export function postToServerWithToken(url, bodyObject,dispatch) {
+export function getToServer(url) {
+	return new Promise((resolve, reject) =>
+    fetch(baseURL + url, {
+			method: 'get',
+			headers: { 'Content-Type': 'application/json' },
+			credentials: 'same-origin'
+		})
+			.then((response) => {
+				if(response.status===429) response.text().then(json=>reject(json));
+				if (response.status === 419) {
+					window.location.reload();
+				}else if (response.status === 200) {
+						response.json().then(json => resolve(json));
+				}else response.json().then(json => reject(json));
+			})
+			.catch((err) => reject(err)),
+	);
+}
+
+export function postToServerWithToken(url, bodyObject) {
 	return new Promise(async (resolve, reject) => {
     const token = await cookies.get('accessToken');
     fetch(baseURL + url, {
@@ -36,19 +52,15 @@ export function postToServerWithToken(url, bodyObject,dispatch) {
 			body: JSON.stringify(bodyObject)
 		})
 			.then((response) => {
-				if(response.status==403){
-					if(response.isLogin===false){
-						dispatch(logOutDoctor());
-						dispatch(clearClinicSlice());
-					}
-				}
+				if(response.status===429) response.text().then(json=>reject(json));
 				if (response.status === 419) {
-					alert('Your session is already expired because you are idle for too long. Page will automatic refesh.');
 					window.location.reload();
 				}
 				if (response.status === 200) {
-						response.json().then(json => resolve(json));
-				} else response.json().then(json => reject(json));
+					response.json().then(json => resolve(json));
+				}else{
+					response.json().then(json => reject(json));
+				} 
 			})
 			.catch((err) => reject(err))
 	  }
@@ -65,8 +77,8 @@ export function putToServerWithToken(url, bodyObject) {
 			body: JSON.stringify(bodyObject)
 		})
 			.then((response) => {
+				if(response.status===429) response.text().then(json=>reject(json));
 				if (response.status === 419) {
-					alert('Your session is already expired because you are idle for too long. Page will automatic refesh.');
 					window.location.reload();
 				}
 				if (response.status === 200) {
@@ -87,20 +99,17 @@ export function getToServerWithToken(url) {
 			credentials: 'same-origin'
 		})
 			.then((response) => {
-				if(response.status===403){
-					response.json().then(json => reject(json))
-				}
-				if (response.status === 419) {
-					alert('Your session is already expired because you are idle for too long. Page will automatic refesh.');
+				if(response.status===429) response.text().then(json=>reject(json));
+				if(response.status === 404){
+					response.text().then(text => reject(text));
+				}else if(response.status === 419) {
 					window.location.reload();
-				}
-				if (response.status === 200) {
+				}else if (response.status === 200) {
 						response.json().then(json => resolve(json));
-				} else response.json().then(json => reject(json));
+				}else response.json().then(json => reject(json));
 			})
 			.catch((err) => reject(err))
-    }
-	);
+    });
 }
 
 
@@ -113,11 +122,8 @@ export function deleteToServerWithToken(url) {
 			credentials: 'same-origin'
 		})
 			.then((response) => {
-				if(response.status===403){
-					response.json().then(json => reject(json))
-				}
+				if(response.status===429) response.text().then(json=>reject(json));
 				if (response.status === 419) {
-					alert('Your session is already expired because you are idle for too long. Page will automatic refesh.');
 					window.location.reload();
 				}
 				if (response.status === 200) {

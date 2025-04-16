@@ -5,10 +5,11 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ButtonComponent from "../common/ButtonComponent.jsx";
-import { isValidEmail, SITE_KEY_RECAPTCHA } from "../common/Utility.jsx";
-import NavbarComponent from "../component/NavbarComponent.jsx";
+import { isValidEmail } from "../common/Utility.jsx";
+import NavbarComponent from "../components/NavbarComponent.jsx";
+import { SITE_KEY_RECAPTCHA } from "../config/GoogleReCAPTCHA.jsx";
 import { setAppName } from "../redux/GeneralSlice.jsx";
-import { getToServer, postToServer } from "../services/getAPI.jsx";
+import { postToServer } from "../services/getAPI.jsx";
 
 function ForgotPasswordPage(props){
   const [email, setEmail] = useState('');
@@ -19,13 +20,12 @@ function ForgotPasswordPage(props){
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
   const [selectedTab,setSelectedTab] = useState(0);
-  const nav = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const {executeRecaptcha} = useGoogleReCaptcha();
 
   useEffect(()=>{
-    dispatch(setAppName(`Myceph - ${t('Forgot password')}`));
+    dispatch(setAppName(`UTEceph - ${t('Forgot password')}`));
   },[])
 
   const onSubmit = (e) => {
@@ -33,7 +33,7 @@ function ForgotPasswordPage(props){
     else if (!isValidEmail(email)) setEmailError(t("email is incorrect format"));
 		else {
 			setLoading(true);
-      executeRecaptcha('login').then(token => 
+      executeRecaptcha('findMail').then(token => 
         postToServer(`/v1/doctor/findDoctorEmail/${email}`, { tokenRecaptcha: token }).then((result) => {
           setEmail(result.email);
           setSelectedTab(1);
@@ -49,8 +49,8 @@ function ForgotPasswordPage(props){
     else if (password !== confirmPassword) setConfirmPasswordError(t('password mismatch'));
     else{
       setLoading(true);
-      executeRecaptcha('login').then(token => 
-        postToServer(`/v1/doctor/resetPassword`, { email: email, password: password}).then((result) => {
+      executeRecaptcha('reset').then(token => 
+        postToServer(`/v1/doctor/resetPassword`, { email: email, password: password, tokenRecaptcha: token}).then((result) => {
           toast.success(result.message);
           setSelectedTab(2);
         })
@@ -77,7 +77,7 @@ function ForgotPasswordPage(props){
             }}
             onKeyDown={e=>{if(e.key === "Enter") onSubmit(e)}}
             placeholder={t("Email")}
-            autocomplete="off"
+            autoComplete="off"
             style={{ height: '45px', outline: 'none' }}
           />
           <span className="material-symbols-outlined mc-color">person</span>
@@ -115,7 +115,7 @@ function ForgotPasswordPage(props){
           }}
           onKeyDown={e=>{if(e.key === "Enter") onReset(e)}}
           placeholder={t("password")}
-          autocomplete="off"
+          autoComplete="off"
           style={{ height: '45px', outline: 'none' }}
         />
         <span className="material-symbols-outlined mc-color">password</span>
@@ -140,7 +140,7 @@ function ForgotPasswordPage(props){
           }}
           onKeyDown={e=>{if(e.key === "Enter") onReset(e)}}
           placeholder={t("Re-enter Password")}
-          autocomplete="off"
+          autoComplete="off"
           style={{ height: '45px', outline: 'none' }}
         />
         <span className="material-symbols-outlined mc-color">password</span>
@@ -159,8 +159,8 @@ function ForgotPasswordPage(props){
     </div>
     break;
     case 2: currentTab = <div className="d-flex flex-column justify-content-center container align-items-center" style={{width:"60em"}}>
-      <span className="mc-color text-center text-capitalize" style={{fontSize:"35px"}}>{t('Reset password for account ')}{email} {t('successfully')}</span>
-      <span className="mc-color text-center text-capitalize fw-bold" style={{fontSize:"70px"}}>MyCeph - Cephalometric</span>
+      <span className="mc-color text-center text-capitalize" style={{fontSize:"35px"}}>{t('Reset password for account')} {email} {t('successfully')}</span>
+      <span className="mc-color text-center text-capitalize fw-bold" style={{fontSize:"70px"}}>uteceph - Cephalometric</span>
       <div className="d-flex justify-content-center" style={{width:"40em"}}>
         <span className="text-center text-gray my-2" style={{fontSize:"20px"}}>{t("You'll receive an email with details to confirm your email address to reset your password. Please check your email within 3 minutes!")}</span>
       </div>
@@ -176,8 +176,8 @@ function ForgotPasswordPage(props){
     className="d-flex flex-column justify-content-start align-items-center"
     style={{
       height: '100%',
-      backgroundImage: `url("/assets/images/login_background.jpg")`,
-      backgroundSize: '100% 100%',
+      backgroundImage: `url("/assets/images/background_desktop.jpg")`,
+      backgroundSize: '100% 125%',
     }}>
     <NavbarComponent />
     <div className="h-100 d-flex flex-column align-items-center justify-content-center">
